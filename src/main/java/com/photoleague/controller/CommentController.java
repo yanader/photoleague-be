@@ -18,14 +18,14 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @GetMapping("/{id}")
-    public CommentDTO findById(@PathVariable Long id) {
-        return commentService.findById(id);
-    }
-
     @GetMapping
     public List<CommentDTO> findAll() {
         return commentService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public CommentDTO findById(@PathVariable Long id) {
+        return commentService.findById(id);
     }
 
     @PostMapping
