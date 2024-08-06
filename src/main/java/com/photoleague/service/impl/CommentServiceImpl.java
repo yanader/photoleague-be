@@ -1,6 +1,6 @@
 package com.photoleague.service.impl;
 
-import com.photoleague.CommentMapper;
+import com.photoleague.mapper.CommentMapper;
 import com.photoleague.entity.Comment;
 import com.photoleague.entity.dto.CommentDTO;
 import com.photoleague.repository.CommentRepository;

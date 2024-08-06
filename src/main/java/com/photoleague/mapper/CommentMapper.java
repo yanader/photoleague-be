@@ -1,7 +1,8 @@
-package com.photoleague;
+package com.photoleague.mapper;
 
 import com.photoleague.entity.Comment;
-import com.photoleague.entity.dto.CommentDTO;
+import com.photoleague.entity.dto.*;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
