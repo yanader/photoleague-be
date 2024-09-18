@@ -1,5 +1,6 @@
 package com.photoleague.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -18,7 +19,8 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
 //                .oauth2Login(oauth2 -> oauth2.defaultSuccessUrl("http://localhost:3000/dashboard", true));
-                .oauth2Login(oauth2 -> oauth2.defaultSuccessUrl("http://localhost:8080/health", true));
+                .oauth2Login(oauth2 -> oauth2.defaultSuccessUrl("http://localhost:8080/health", true)
+                );
         return http.build();
     }
 
