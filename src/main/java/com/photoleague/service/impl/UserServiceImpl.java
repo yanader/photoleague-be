@@ -3,7 +3,7 @@ package com.photoleague.service.impl;
 import com.photoleague.entity.Comment;
 import com.photoleague.entity.dto.CommentDTO;
 import com.photoleague.repository.UserRepository;
-import com.photoleague.service.CommentService;
+import com.photoleague.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CommentServiceImpl implements CommentService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
