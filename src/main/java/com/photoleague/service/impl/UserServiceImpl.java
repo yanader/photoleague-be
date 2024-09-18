@@ -1,13 +1,14 @@
 package com.photoleague.service.impl;
 
 import com.photoleague.entity.Comment;
-import com.photoleague.entity.dto.CommentDTO;
+import com.photoleague.entity.User;
 import com.photoleague.repository.UserRepository;
 import com.photoleague.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,21 +17,17 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public void save(CommentDTO commentDTO) {
-        Comment comment = commentMapper.fromCommentDTOToComment(commentDTO);
-        userRepository.save(comment);
+    public void save(User user) {
+        userRepository.save(user);
     }
 
     @Override
-    public List<CommentDTO> findAll() {
-        return userRepository.findAll().stream()
-                .map(commentMapper::fromCommentToCommentDTO)
-                .toList();
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
     @Override
-    public CommentDTO findById(Long id) {
-        return commentMapper.fromCommentToCommentDTO(userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Comment not found with id " + id)));
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 }

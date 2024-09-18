@@ -1,6 +1,5 @@
 package com.photoleague.service;
 import com.photoleague.entity.User;
-import com.photoleague.entity.dto.CommentDTO;
 
 import java.util.List;
 
