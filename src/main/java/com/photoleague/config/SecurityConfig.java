@@ -43,10 +43,11 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) ->
                 requests.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() //This allows the preflight options request that is otherwise missed (for some reason)
-                        .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers("/signin").permitAll()
+//                        .requestMatchers("/hello").permitAll()
+                        .requestMatchers("/api/user-info").permitAll()
                         .requestMatchers("/api/public/**").permitAll()
-                        .anyRequest().authenticated());
+                        .anyRequest().authenticated())
+                .oauth2Login(oauth2 -> oauth2.defaultSuccessUrl("http://localhost:3000/dashboard", true));
         http.sessionManagement(session ->
                 session.sessionCreationPolicy(
                         SessionCreationPolicy.STATELESS));
@@ -71,20 +72,6 @@ public class SecurityConfig {
             JdbcUserDetailsManager userDetailsManager
                     = new JdbcUserDetailsManager(dataSource);
 
-//            if(!manager.userExists("user1")) {
-//                UserDetails user1 = User.withUsername("user1")
-//                        .password(passwordEncoder().encode("password1"))
-//                        .roles("USER")
-//                        .build();
-//                userDetailsManager.createUser(user1);
-//            }
-//            if (!manager.userExists("admin")) {
-//                UserDetails admin = User.withUsername("admin")
-//                        .password(passwordEncoder().encode("adminPassword"))
-//                        .roles("ADMIN")
-//                        .build();
-//                userDetailsManager.createUser(admin);
-//            }
         };
     }
 
