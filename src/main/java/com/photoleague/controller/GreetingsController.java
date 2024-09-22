@@ -1,4 +1,4 @@
-package com.photoleague;
+package com.photoleague.controller;
 
 
 import com.photoleague.jwt.LoginRequest;
