@@ -1,23 +1,47 @@
 package com.photoleague;
 
-//import org.springframework.security.core.annotation.AuthenticationPrincipal;
-//import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.sql.DataSource;
+
+
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api")
 public class UserController {
 
-    @GetMapping("/health")
-    public String health() {
-        return "UP";
-    }
+    @Autowired
+    DataSource datasource;
 
-//    @GetMapping
-//    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principle) {
-//        return principle.getAttributes();
-//    }
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @PostMapping("/public/users")
+    public String createUser(@RequestParam String username,
+                             @RequestParam String password,
+                             @RequestParam String role) {
+        JdbcUserDetailsManager userDetailsManager
+                = new JdbcUserDetailsManager(datasource);
+
+        if (userDetailsManager.userExists(username)) {
+            return "User already exists!";
+        }
+
+        UserDetails user = User.withUsername(username)
+                .password(passwordEncoder.encode(password))
+                .roles(role)
+                .build();
+
+        userDetailsManager.createUser(user);
+
+        return "User created successfully";
+    }
 
 }
