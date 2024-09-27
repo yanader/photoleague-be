@@ -1,0 +1,2 @@
+1) the problem with the current login is that we check whether the user exists with email but github
+    won't necesarily have one. Need to change to check by username and log in platform.
