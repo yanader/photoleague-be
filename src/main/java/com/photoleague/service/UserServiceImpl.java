@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService{
     public User processOAuthPostLogin(OAuth2User principal) {
         String email = principal.getAttribute("email");
 
+
         Optional<User> existingUser = userRepository.findByEmail(email);
 
 
@@ -69,5 +70,21 @@ public class UserServiceImpl implements UserService{
         newUser.setImgUrl(principal.getAttribute("avatar_url"));
         newUser.setLoginSource(platform);
         return newUser;
+    }
+
+    @Override
+    public boolean userExists(OAuth2User principal) {
+        String platform = extractOAuth2Platform();
+        if (platform.equals("google")) {
+            String name = principal.getAttribute("name");
+            Optional<User> existingUser = userRepository.findByNameAndLoginSource(name, "google");
+            if(existingUser.isPresent()) return true;
+        }
+        if (platform.equals("github")) {
+            String name = principal.getAttribute("login");
+            Optional<User> existingUser = userRepository.findByNameAndLoginSource(name, "github");
+            if(existingUser.isPresent()) return true;
+        }
+        return false;
     }
 }

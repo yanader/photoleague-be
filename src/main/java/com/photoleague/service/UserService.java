@@ -9,4 +9,5 @@ public interface UserService {
     User setUpNewUser(OAuth2User principal, String platform);
     User processGoogleOAuthLogin(OAuth2User principal, String oAuth2Platform);
     User processGithubOAuthLogin(OAuth2User principal, String oAuth2Platform);
+    boolean userExists(OAuth2User principal);
 }
