@@ -16,7 +16,10 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
+                .authorizeHttpRequests(authorizeRequests -> {
+//                    authorizeRequests.requestMatchers("/upload").permitAll(); // The endpoint works when this is added in
+                    authorizeRequests.anyRequest().authenticated();
+                })
                 .oauth2Login(oauth2 -> oauth2.defaultSuccessUrl("http://localhost:3000/dashboard", true));
         return http.build();
     }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -21,7 +22,6 @@ public class UserController {
     public Map<String, Object> user(
             @AuthenticationPrincipal OAuth2User principal) {
 
-
         User user = userService.processOAuthPostLogin(principal);
 
         Map<String, Object> userInfo = new HashMap<>();
@@ -30,5 +30,13 @@ public class UserController {
         userInfo.put("picture", user.getImgUrl());
 
         return userInfo;
+    }
+
+    @PostMapping("/upload")
+    public String imageTester() {
+        String result = "THE ENDPOINT HAS BEEN HIT";
+        System.out.println(result);
+        return result;
+
     }
 }
