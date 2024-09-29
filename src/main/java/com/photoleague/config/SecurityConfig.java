@@ -13,6 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
@@ -20,7 +22,7 @@ public class SecurityConfig {
 //                    authorizeRequests.requestMatchers("/upload").permitAll(); // The endpoint works when this is added in
                     authorizeRequests.anyRequest().authenticated();
                 })
-                .oauth2Login(oauth2 -> oauth2.defaultSuccessUrl("http://localhost:3000/dashboard", true));
+                .oauth2Login(oauth2 -> oauth2.successHandler(oAuth2LoginSuccessHandler).defaultSuccessUrl("http://localhost:3000/dashboard", true));
         return http.build();
     }
 
