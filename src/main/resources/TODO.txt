@@ -5,7 +5,7 @@
 TODO
 
 implement JWT to be able to authorize the use of different endpoints
-
+    As part of this I need to explore whether I should be using UserDetails & UserDetails service along with them.
 
 
 DONE
