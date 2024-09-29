@@ -1,6 +1,6 @@
 package com.photoleague.config;
 
-import com.photoleague.jwt.JwtUtil;
+import com.photoleague.jwt.JwtUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
@@ -13,9 +13,9 @@ import java.io.IOException;
 @Component
 public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private final JwtUtil jwtUtils;
+    private final JwtUtils jwtUtils;
 
-    public OAuth2LoginSuccessHandler(JwtUtil jwtUtils) {
+    public OAuth2LoginSuccessHandler(JwtUtils jwtUtils) {
         this.jwtUtils = jwtUtils;
     }
 
